@@ -17,7 +17,7 @@ logger = logging.getLogger('api.upload')
 secret = secrets.token_urlsafe(32)
 
 UPLOAD_FOLDER = 'files/'
-EXTERNAL_PATH = 'media\\'
+EXTERNAL_PATH = 'media/'
 SWAGGER_URL = '/openapi'
 API_URL = '/static/swagger.json'
 swaggerui_blueprint = get_swaggerui_blueprint(
@@ -78,4 +78,4 @@ def serve(where, file, file_type):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host = '0.0.0.0', port = 5999)

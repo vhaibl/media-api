@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+
+  app:
+    restart: always
+    build: .
+    ports:
+      - 5999:5999
+    volumes:
+      - .:/app
+    entrypoint: ["python", "app.py"]
