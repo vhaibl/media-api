@@ -6,8 +6,10 @@ import uuid
 from http import HTTPStatus
 
 from flask import Flask, jsonify, request, send_from_directory
+from flask_swagger_ui import get_swaggerui_blueprint
 
 import media_logging
+
 
 logging.config.dictConfig(media_logging.LOGGING)
 logger = logging.getLogger('api.upload')
@@ -16,12 +18,25 @@ secret = secrets.token_urlsafe(32)
 
 UPLOAD_FOLDER = 'files/'
 EXTERNAL_PATH = 'media\\'
+SWAGGER_URL = '/openapi'
+API_URL = '/static/swagger.json'
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL, API_URL, config={
+        'app_name': "AuditorPro-Media-Api"
+    }
+)
 
 app = Flask(__name__)
 app.base_dir = sys.path[0]
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['EXTERNAL_PATH'] = EXTERNAL_PATH
 app.secret_key = secret
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
 
 @app.route('/', methods=['GET', 'POST'])
