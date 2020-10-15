@@ -1,0 +1,89 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "AuditorPro_MediaApi",
+    "description": "API for uploading & downloading files",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/{where}/": {
+      "post": {
+        "tags": [
+          "Upload"
+        ],
+        "summary": "Upload media files",
+        "parameters": [
+          {
+            "name": "where",
+            "in": "path",
+            "description": "Folder for saving uploaded file",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "photo/audio"
+                ],
+                "type": "object",
+                "properties": {
+                  "photo": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{path_to_file}": {
+      "get": {
+        "tags": [
+          "Download"
+        ],
+        "summary": "Get uploaded file",
+        "parameters": [
+          {
+            "name": "path_to_file",
+            "in": "path",
+            "description": "Full path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
