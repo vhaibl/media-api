@@ -33,7 +33,7 @@ app.secret_key = secret
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 
-@app.route('/ping')
+@app.route('/ping', methods=['GET'])
 def ping():
     return 'OK', HTTPStatus.OK
 

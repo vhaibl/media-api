@@ -84,6 +84,19 @@
           }
         }
       }
+    },
+        "/ping": {
+      "get": {
+        "tags": [
+          "Download"
+        ],
+        "summary": "Ping service",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   }
 }
