@@ -56,7 +56,7 @@ def upload_file(where):
         return save_file(where, file_type, folder)
     if 'audio' in request.files:
         file_type = 'audio'
-        folder = 'images'
+        folder = 'audio'
         return save_file(where, file_type, folder)
 
     return jsonify({'result': 'Media file has not sent'}), HTTPStatus.BAD_REQUEST
