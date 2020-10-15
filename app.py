@@ -10,7 +10,6 @@ from flask_swagger_ui import get_swaggerui_blueprint
 
 import media_logging
 
-
 logging.config.dictConfig(media_logging.LOGGING)
 logger = logging.getLogger('api.upload')
 
@@ -32,6 +31,11 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['EXTERNAL_PATH'] = EXTERNAL_PATH
 app.secret_key = secret
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
+
+@app.route('/ping')
+def ping():
+    return 'OK', HTTPStatus.OK
 
 
 @app.route('/static/<path:path>')
@@ -78,4 +82,4 @@ def serve(where, file, file_type):
 
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 5999)
+    app.run(host='0.0.0.0', port=5999)
