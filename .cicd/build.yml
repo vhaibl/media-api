@@ -1,0 +1,21 @@
+include:
+  - project: 'auditor2/backend/ci-cd'
+    ref: master
+    file: '/gitlab_cicd/docker_build.yml'
+
+docker-build:
+  stage: build
+  extends: .docker_build_gitlab
+  variables:
+    URL_REGISTRY: $CI_REGISTRY
+    REGISTRY_USER: $CI_REGISTRY_USER
+    REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+    REGISTRY_IMAGE: $CI_REGISTRY_IMAGE
+    REGISTRY_IMAGE_NAME: 'media-api-img'
+    PATH_TO_CONTEXT: './'
+  when: manual
+  tags:
+    - docker
+  only:
+    - master
+    - merge-request

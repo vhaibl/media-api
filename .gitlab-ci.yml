@@ -1,2 +1,12 @@
+stages:
+  - build
+  # - test
+  # - deploy review
+  # - deploy production
+
+
 include:
-  - file: 'https://gitlab.com/auditor2/backend/ci-cd/-/blob/master/gitlab_cicd/base_stages.yml'
+  - local: .cicd/build.yml
+  # - local: .cicd/tests.yml
+  # - local: .cicd/deploy_review.yml
+  # - local: .cicd/deploy_production.yml
